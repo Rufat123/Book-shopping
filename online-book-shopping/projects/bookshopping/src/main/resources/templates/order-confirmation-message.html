@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sifariş qeydiyyatı</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="menu :: menu"></div>
+<div class="container">
+<h1>Sifarişiniz qəbul olundu</h1>
+
+<a class="btn btn-success" th:href="@{/customer}">Aliş-verişi davam et</a>
+</div>
+<script type="text/javascript">
+localStorage.setItem('basketBooks','[]');
+</script>
+</body>
+</html>

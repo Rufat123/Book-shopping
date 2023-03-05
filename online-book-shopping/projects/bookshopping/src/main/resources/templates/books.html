@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Kitablar</title>
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('#books-table').DataTable();
+	});
+</script>
+<style>
+	#username{
+		display: inline-block;
+		font-size: 24px;
+		font-weight: bold;
+		margin: 0;
+	}
+	.book-image{
+		width: 40px;
+	}
+</style>
+</head>
+<body>
+<div th:replace="menu :: menu"></div>
+	<div class="container-fluid">
+		
+
+		<a class="btn btn-success" th:href="@{/books/new}">Yeni kitab</a>
+		<a class="btn btn-primary" th:href="@{/}">Esaas Sehife</a>
+		<span th:text="${username}" id="username"></span>
+		<div style="height: 5px"></div>
+
+		<table id="books-table" class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Ad</th>
+					<th>Təsvir</th>
+					<th>Qiymət</th>
+					<th>Müəllif</th>
+					<th>Səhifə sayı</th>
+					<th>Şəkil</th>
+					<th>Əməliyyat</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="book : ${books}">
+					<td th:text="${book.id}"></td>
+					<td th:text="${book.name}"></td>
+					<td th:text="${book.description}"></td>
+					<td th:text="${book.price}"></td>
+					<td th:text="${book.author}"></td>
+					<td th:text="${book.pageCount}"></td>
+					
+					
+					<td><img class="book-image"
+					 th:src="@{'/files/'+${book.image}}"></td>
+					
+					
+					<td><a
+						onclick="return confirm('Siz masini sistemnen silmeyinize eminsiniz?');"
+						th:href="@{/books/delete/{id}(id=${book.id})}"
+						class="btn btn-danger">Sil</a> <a
+						th:href="@{/books/edit/{id}(id=${book.id})}"
+						class="btn btn-primary">Redaktə</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+
+</body>
+</html>
